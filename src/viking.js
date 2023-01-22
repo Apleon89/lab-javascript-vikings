@@ -64,25 +64,43 @@ class War {
         let ramdomSaxon = Math.floor(Math.random() * this.saxonArmy.length);
         let ramdomViking = Math.floor(Math.random() * this.vikingArmy.length);
 
-        for (let i = 0; i < this.saxonArmy.length; i++) {
-            if ( this.saxonArmy[i].health <= 0 ) {
-                this.saxonArmy.splice(this.saxonArmy[i], 1);
-            }
-        };
+        let saxonDamage = this.saxonArmy[ramdomSaxon].receiveDamage(this.vikingArmy[ramdomViking].strength);
 
-        return this.saxonArmy[ramdomSaxon].receiveDamage(this.vikingArmy[ramdomViking].strength);
+        if (ramdomSaxon.health <= 0) {
+            this.saxonArmy.splice(ramdomSaxon, 1)
+        }
+
+        return saxonDamage;
+    //     for (let i = 0; i < this.saxonArmy.length; i++) {
+    //         if ( this.saxonArmy[i].health <= 0 ) {
+    //             this.saxonArmy.splice(this.saxonArmy[i], 1);
+    //         }
+    //     };
+
+    //     return this.saxonArmy[ramdomSaxon].receiveDamage(this.vikingArmy[ramdomViking].strength);
     };
+
+
+
     saxonAttack = ( ) => {
         let ramdomSaxon = Math.floor(Math.random() * this.saxonArmy.length);
         let ramdomViking = Math.floor(Math.random() * this.vikingArmy.length);
 
-        for (let i = 0; i < this.vikingArmy.length; i++) {
-            if ( this.vikingArmy[i].health <= 0 ) {
-                this.vikingArmy.splice(this.vikingArmy[i], 1);
-            }
+        let vikingDamage = this.vikingArmy[ramdomViking].receiveDamage(this.saxonArmy[ramdomSaxon].strength);
+
+        if (ramdomViking.health <= 0) {
+            this.saxonArmy.splice(ramdomViking, 1)
         };
 
-        return this.vikingArmy[ramdomViking].receiveDamage(this.saxonArmy[ramdomSaxon].strength);
+
+        return vikingDamage;
+        // for (let i = 0; i < this.vikingArmy.length; i++) {
+        //     if ( this.vikingArmy[i].health <= 0 ) {
+        //         this.vikingArmy.splice(this.vikingArmy[i], 1);
+        //     }
+        // };
+
+        // return this.vikingArmy[ramdomViking].receiveDamage(this.saxonArmy[ramdomSaxon].strength);
         
     };
     showStatus = ( ) => {
