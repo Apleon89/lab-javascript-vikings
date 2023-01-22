@@ -60,14 +60,17 @@ class War {
     addSaxon = ( Saxon ) => {
         this.saxonArmy.push(Saxon);
     };
-    vikingAttack = ( ) => {
-        let ramdomSaxon = Math.floor(Math.random() * this.saxonArmy.length);
-        let ramdomViking = Math.floor(Math.random() * this.vikingArmy.length);
 
-        let saxonDamage = this.saxonArmy[ramdomSaxon].receiveDamage(this.vikingArmy[ramdomViking].strength);
+    vikingAttack = ( ) => {
+        let ramdomSaxonIndex = Math.floor(Math.random() * this.saxonArmy.length);
+        let ramdomSaxon = this.saxonArmy[ramdomSaxonIndex];
+        let ramdomVikingIndex = Math.floor(Math.random() * this.vikingArmy.length);
+        let ramdomViking = this.vikingArmy[ramdomVikingIndex];
+
+        let saxonDamage = ramdomSaxon.receiveDamage(ramdomViking.strength);
 
         if (ramdomSaxon.health <= 0) {
-            this.saxonArmy.splice(ramdomSaxon, 1)
+            this.saxonArmy.splice(ramdomSaxonIndex, 1)
         }
 
         return saxonDamage;
@@ -80,18 +83,17 @@ class War {
     //     return this.saxonArmy[ramdomSaxon].receiveDamage(this.vikingArmy[ramdomViking].strength);
     };
 
-
-
     saxonAttack = ( ) => {
-        let ramdomSaxon = Math.floor(Math.random() * this.saxonArmy.length);
-        let ramdomViking = Math.floor(Math.random() * this.vikingArmy.length);
+        let ramdomSaxonIndex = Math.floor(Math.random() * this.saxonArmy.length);
+        let ramdomSaxon= this.saxonArmy[ramdomSaxonIndex];
+        let ramdomVikingIndex = Math.floor(Math.random() * this.vikingArmy.length);
+        let ramdomViking = this.vikingArmy[ramdomVikingIndex];
 
-        let vikingDamage = this.vikingArmy[ramdomViking].receiveDamage(this.saxonArmy[ramdomSaxon].strength);
+        let vikingDamage = ramdomViking.receiveDamage(ramdomSaxon.strength);
 
         if (ramdomViking.health <= 0) {
-            this.saxonArmy.splice(ramdomViking, 1)
+            this.vikingArmy.splice(ramdomVikingIndex, 1)
         };
-
 
         return vikingDamage;
         // for (let i = 0; i < this.vikingArmy.length; i++) {
@@ -101,7 +103,7 @@ class War {
         // };
 
         // return this.vikingArmy[ramdomViking].receiveDamage(this.saxonArmy[ramdomSaxon].strength);
-        
+    
     };
     showStatus = ( ) => {
         if (this.saxonArmy.length === 0 ){
@@ -109,7 +111,7 @@ class War {
         } else if (this.vikingArmy.length === 0) {
             return "Saxons have fought for their lives and survived another day...";
         } else {
-            return "Saxons have fought for their lives and survived another day..."
+            return "Vikings and Saxons are still in the thick of battle."
         }
     }
 }
